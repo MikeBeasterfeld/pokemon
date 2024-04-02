@@ -16,9 +16,9 @@ export default async function Pokemon({
   return (
     <div className="container mx-auto flex">
       <div className="container">
-        <p>
-          Name: <span className="capitalize">{pokemon.name}</span>
-        </p>
+        <h2 className="text-3xl">
+          <span className="capitalize">{pokemon.name}</span>
+        </h2>
         <p>Height: {pokemon.height / 10} m</p>
         <p>Weight: {pokemon.weight / 10} kg</p>
         <p>Abilities:</p>
