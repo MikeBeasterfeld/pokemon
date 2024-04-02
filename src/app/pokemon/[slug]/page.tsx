@@ -1,57 +1,37 @@
 import { Metadata } from "next/types";
 import Image from "next/image";
-import { z } from "zod";
+import { getPokemon } from "@/app/api/pokiapi";
 
 export const metadata: Metadata = {
   title: "Details",
 };
-
-const PokemonSchema = z.object({
-  name: z.string(),
-  sprites: z.object({
-    front_default: z.string().url(),
-  }),
-  height: z.number(),
-  weight: z.number(),
-  abilities: z.array(
-    z.object({
-      ability: z.object({
-        name: z.string(),
-      }),
-    })
-  ),
-});
 
 export default async function Pokemon({
   params,
 }: {
   params: { slug: string };
 }) {
-  const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.slug}`, {
-    cache: "force-cache",
-  });
-
-  const data = PokemonSchema.parse(await req.json());
+  const pokemon = await getPokemon(params.slug);
 
   return (
     <div className="container mx-auto flex">
       <div className="container">
         <p>
-          Name: <span className="capitalize">{data.name}</span>
+          Name: <span className="capitalize">{pokemon.name}</span>
         </p>
-        <p>Height: {data.height / 10} m</p>
-        <p>Weight: {data.weight / 10} kg</p>
+        <p>Height: {pokemon.height / 10} m</p>
+        <p>Weight: {pokemon.weight / 10} kg</p>
         <p>Abilities:</p>
         <ul className="list-disc ml-5">
-          {data.abilities.map((ability) => (
+          {pokemon.abilities.map((ability) => (
             <li key={ability.ability.name}>{ability.ability.name}</li>
           ))}
         </ul>
       </div>
       <div className="w-4/5">
         <Image
-          src={data.sprites.front_default}
-          alt={data.name}
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
           priority
           width={960}
           height={960}
