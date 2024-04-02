@@ -28,15 +28,20 @@ export default async function Pokemon({
 
   const data = PokemonSchema.parse(await req.json());
 
-  // console.log(data);
-
   return (
     <div className="container mx-auto flex">
       <div className="container">
         <p>
           Name: <span className="capitalize">{data.name}</span>
         </p>
-        <p>Height: {data.height}</p>
+        <p>Height: {data.height / 10} m</p>
+        <p>Weight: {data.weight / 10} kg</p>
+        <p>Abilities:</p>
+        <ul className="list-disc ml-5">
+          {data.abilities.map((ability) => (
+            <li key={ability.ability.name}>{ability.ability.name}</li>
+          ))}
+        </ul>
       </div>
       <div className="w-4/5">
         <Image

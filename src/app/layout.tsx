@@ -19,7 +19,9 @@ export default function RootLayout({
       <body className="container mx-auto mt-5">
         <div className="container px-10 py-5 rounded dark:bg-gray-800 bg-gray-400">
           <div>
-            <a href="/">Pokedex</a>
+            <h3>
+              <a href="/">Pokedex</a>
+            </h3>
           </div>
         </div>
         <div className="container px-10 py-5 my-5 rounded dark:bg-gray-800 bg-gray-400">
