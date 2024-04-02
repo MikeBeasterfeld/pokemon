@@ -17,12 +17,12 @@ export default async function Home() {
   );
 
   return (
-    <p>
+    <ul>
       {data.map((pokemon) => (
-        <ul key={pokemon.name}>
+        <li key={pokemon.name}>
           <a href={`/pokemon/${pokemon.name}`}>{pokemon.name}</a>
-        </ul>
+        </li>
       ))}
-    </p>
+    </ul>
   );
 }
