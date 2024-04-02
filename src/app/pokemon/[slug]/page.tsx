@@ -1,5 +1,10 @@
+import { Metadata } from "next/types";
 import Image from "next/image";
 import { z } from "zod";
+
+export const metadata: Metadata = {
+  title: "Details",
+};
 
 const PokemonSchema = z.object({
   name: z.string(),
