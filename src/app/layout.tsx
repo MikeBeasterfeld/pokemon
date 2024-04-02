@@ -16,13 +16,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="navigation">
+      <body className="container mx-auto mt-5">
+        <div className="container px-10 py-5 rounded dark:bg-gray-800 bg-gray-400">
           <div>
-            <a href="/">Home</a>
+            <a href="/">Pokedex</a>
           </div>
         </div>
-        <div className="container">{children}</div>
+        <div className="container px-10 py-5 my-5 rounded dark:bg-gray-800 bg-gray-400">
+          {children}
+        </div>
       </body>
     </html>
   );

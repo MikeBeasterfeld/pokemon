@@ -17,12 +17,14 @@ export default async function Home() {
   );
 
   return (
-    <ul>
+    <div className="columns-3xs">
       {data.map((pokemon) => (
-        <li key={pokemon.name}>
-          <a href={`/pokemon/${pokemon.name}`}>{pokemon.name}</a>
-        </li>
+        <div key={pokemon.name} className="pr-4">
+          <a href={`/pokemon/${pokemon.name}`} className="capitalize">
+            {pokemon.name}
+          </a>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

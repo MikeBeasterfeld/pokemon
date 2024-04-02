@@ -1,5 +1,5 @@
-import { z } from "zod";
 import Image from "next/image";
+import { z } from "zod";
 
 const PokemonSchema = z.object({
   name: z.string(),
@@ -28,20 +28,25 @@ export default async function Pokemon({
 
   const data = PokemonSchema.parse(await req.json());
 
+  // console.log(data);
+
   return (
-    <>
-      <p>
-        Name: <span className="capitalize">{data.name}</span>
-      </p>
-      <p>Height: {data.height}</p>
-      <div>
+    <div className="container mx-auto flex">
+      <div className="container">
+        <p>
+          Name: <span className="capitalize">{data.name}</span>
+        </p>
+        <p>Height: {data.height}</p>
+      </div>
+      <div className="w-4/5">
         <Image
           src={data.sprites.front_default}
           alt={data.name}
-          width={96}
-          height={96}
+          priority
+          width={960}
+          height={960}
         />
       </div>
-    </>
+    </div>
   );
 }
