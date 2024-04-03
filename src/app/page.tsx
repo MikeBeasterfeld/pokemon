@@ -1,7 +1,21 @@
-import { getPokemonList } from "@/app/api/pokiapi";
+"use client";
 
-export default async function Home() {
-  const data = await getPokemonList();
+import { useState, useEffect } from "react";
+import { PokemonSchemaArrayType, getPokemonList } from "@/app/api/pokiapi";
+
+export default function Home() {
+  const [data, setData] = useState<PokemonSchemaArrayType>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPokemonList().then((data) => {
+      setData(data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>Could not connect to API</p>;
 
   return (
     <div className="columns-3xs">

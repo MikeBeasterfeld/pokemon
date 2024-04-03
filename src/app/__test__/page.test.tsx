@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { expect, test } from "vitest";
 import Home from "../page";
 
@@ -13,7 +13,8 @@ test("Home", async () => {
     JSON.stringify({ results: [{ name: "bob", url: "http://example.com" }] })
   );
 
-  const homejsx = await Home();
-  render(homejsx);
-  expect(screen.getByRole("link", { name: "bob" })).toBeDefined();
+  render(<Home />);
+  await waitFor(() => {
+    expect(screen.getByRole("link", { name: "bob" })).toBeDefined();
+  });
 });

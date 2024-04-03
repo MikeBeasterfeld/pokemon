@@ -16,7 +16,7 @@ const PokemonSchema = z.object({
     ),
 });
 
-type PokemonSchemaType = z.infer<typeof PokemonSchema>;
+export type PokemonSchemaType = z.infer<typeof PokemonSchema>;
 
 export async function getPokemon(name: string): Promise<PokemonSchemaType> {
     const req = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
@@ -35,7 +35,7 @@ const PokemonListSchema = z.object({
 
 const PokemonSchemaArray = z.array(PokemonListSchema);
 
-type PokemonSchemaArrayType = z.infer<typeof PokemonSchemaArray>;
+export type PokemonSchemaArrayType = z.infer<typeof PokemonSchemaArray>;
 
 export async function getPokemonList(): Promise<PokemonSchemaArrayType> {
 

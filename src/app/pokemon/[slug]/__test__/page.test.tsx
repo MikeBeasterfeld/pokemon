@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { expect, test } from "vitest";
-import Pokemon from "../page";
+import Detail from "../detail";
 
 import { vi } from "vitest";
 import createFetchMock from "vitest-fetch-mock";
@@ -8,7 +8,7 @@ import createFetchMock from "vitest-fetch-mock";
 const fetchMocker = createFetchMock(vi);
 fetchMocker.enableMocks();
 
-test("Home", async () => {
+test("Detail", async () => {
   fetchMocker.mockResponse(
     JSON.stringify({
       name: "bob",
@@ -27,7 +27,14 @@ test("Home", async () => {
     })
   );
 
-  const homejsx = await Pokemon({ params: { slug: "bob" } });
-  render(homejsx);
-  expect(screen.getByText("myability")).toBeDefined();
+  // const homejsx = Detail({ params: { slug: "bob" } });
+  render(<Detail params={{ slug: "bob" }} />);
+
+  // await waitFor(() => {
+  //   expect(screen.getByText("Loading...")).not.toBeDefined();
+  // });
+
+  await waitFor(() => {
+    expect(screen.getByText("myability")).toBeDefined();
+  });
 });
